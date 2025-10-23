@@ -1,0 +1,36 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      # 1. 저장소 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Node.js 설치
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      # 3. npm 패키지 설치 (lock 파일 기준)
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Electron-builder 빌드 (Windows 64bit)
+      - name: Build Electron App
+        run: npx electron-builder --win --x64
+
+      # 5. 빌드된 EXE 업로드
+      - name: Upload EXE artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: JunwooBrowser666-EXE
+          path: dist/*.exe
