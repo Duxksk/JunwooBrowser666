@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Junwoo Browser 666 Edition</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at center, #000 70%, #111 100%);
+      color: #e60000;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+
+    /* 💀 글리치 시작 화면 */
+    #glitch-screen {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      color: #e60000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+      letter-spacing: 4px;
+      z-index: 999;
+      animation: glitchOut 3s forwards;
+    }
+    @keyframes glitchOut {
+      0% {opacity: 1; transform: none;}
+      40% {opacity: 1; transform: skewX(10deg);}
+      60% {opacity: 0.5; transform: skewX(-10deg);}
+      100% {opacity: 0; visibility: hidden;}
+    }
+
+    #toolbar {
+      background: rgba(20, 20, 20, 0.95);
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #300;
+    }
+
+    button {
+      background: transparent;
+      border: none;
+      color: #e60000;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { color: #ff0000; }
+
+    input {
+      flex: 1;
+      margin: 0 6px;
+      padding: 6px;
+      background: #111;
+      color: #f33;
+      border: 1px solid #400;
+      border-radius: 3px;
+      outline: none;
+      font-family: 'Courier New', monospace;
+      caret-color: #f00;
+      animation: blinkCursor 1s step-end infinite;
+    }
+    @keyframes blinkCursor {
+      from, to {border-color: #400;}
+      50% {border-color: #f00;}
+    }
+
+    iframe {
+      width: 100%;
+      height: calc(100vh - 45px);
+      border: none;
+      background: #000;
+    }
+
+    #title {
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: #b00;
+      margin-right: 8px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 💀 글리치 시작 애니메이션 -->
+  <div id="glitch-screen">☠ JUNWOO BROWSER 666 ☠</div>
+
+  <div id="toolbar">
+    <div id="title">☠ JUNWOO BROWSER 666 ☠</div>
+    <button onclick="goBack()">←</button>
+    <button onclick="goForward()">→</button>
+    <input id="url" placeholder="Enter the void..." onkeydown="checkEnter(event)">
+    <button onclick="loadURL()">GO</button>
+  </div>
+
+  <iframe id="webview" src="https://google.com"></iframe>
+
+  <!-- 🔥 효과음 -->
+  <audio id="tabSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0df622eb93.mp3?filename=glitch-sound-10172.mp3" preload="auto"></audio>
+
+  <script>
+    const webview = document.getElementById('webview');
+    const urlInput = document.getElementById('url');
+    const tabSound = document.getElementById('tabSound');
+
+    function loadURL() {
+      let url = urlInput.value;
+      if (!url.startsWith('http')) url = 'https://' + url;
+      webview.src = url;
+
+      // 🔥 불길한 소리 재생
+      tabSound.currentTime = 0;
+      tabSound.play();
+    }
+
+    function checkEnter(e) {
+      if (e.key === 'Enter') loadURL();
+    }
+
+    function goBack() {
+      history.back();
+    }
+
+    function goForward() {
+      history.forward();
+    }
+
+    // 💀 글리치 효과 제거 타이밍
+    setTimeout(() => {
+      document.getElementById('glitch-screen').style.display = 'none';
+    }, 3000);
+  </script>
+</body>
+</html>

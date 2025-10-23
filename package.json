@@ -1,0 +1,23 @@
+{
+  "name": "junwoo-browser-666",
+  "version": "1.0.0",
+  "description": "Junwoo Browser 666 Edition - Dark Glitch Edition",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0",
+    "electron-builder": "^24.6.0"
+  },
+  "build": {
+    "appId": "com.junwoo.browser666",
+    "productName": "Junwoo Browser 666",
+    "win": {
+      "target": [
+        "portable"
+      ]
+    }
+  }
+}
